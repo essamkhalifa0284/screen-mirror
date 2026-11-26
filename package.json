@@ -11,6 +11,11 @@
     "postinstall": "node node_modules/electron/install.js"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.6.3",
+    "@capacitor/cli": "^8.6.3",
+    "@capacitor/core": "^8.6.3",
+    "@capacitor/filesystem": "^8.1.5",
+    "@capacitor/share": "^8.0.3",
     "electron": "^45.5.0",
     "electron-builder": "^26.18.0"
   },

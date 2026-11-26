@@ -1,0 +1,8 @@
+{
+  "appId": "io.github.essamkhalifa0284.mirror",
+  "appName": "المرآة",
+  "webDir": "docs",
+  "android": {
+    "backgroundColor": "#000000"
+  }
+}

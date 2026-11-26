@@ -2,3 +2,9 @@ node_modules/
 dist/
 *.log
 .claude/
+
+# Android signing key and its passwords: never commit, keep a backup
+android-signing/
+android/keystore.properties
+*.jks
+*.keystore

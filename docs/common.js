@@ -2,6 +2,20 @@
 
 // Shared helpers for both mirror pages.
 const $ = (id) => document.getElementById(id);
+
+// Running inside the Android app (Capacitor) rather than a browser?
+const isNativeApp = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+const nativePlugin = (name) => (isNativeApp && window.Capacitor.Plugins ? window.Capacitor.Plugins[name] : null);
+
+// Android app only: set screen brightness (0..1), or null for the phone's normal brightness.
+let lastBrightness;
+function setScreenBrightness(value) {
+  const v = value == null ? -1 : value;
+  const p = nativePlugin('MirrorScreen');
+  if (!p || v === lastBrightness) return;
+  lastBrightness = v;
+  p.setBrightness({ value: v }).catch(() => {});
+}
 const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
 function loadJSON(key) {
@@ -51,7 +65,8 @@ document.addEventListener('pointerup', keepAwake);
 const isStandalone = () =>
   window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 function canFullscreen() {
-  return !!document.documentElement.requestFullscreen && !isStandalone();
+  // The Android app is already full screen.
+  return !isNativeApp && !!document.documentElement.requestFullscreen && !isStandalone();
 }
 function toggleFullscreen() {
   if (!canFullscreen()) return;
@@ -60,7 +75,7 @@ function toggleFullscreen() {
 }
 
 // Offline support
-if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+if ('serviceWorker' in navigator && location.protocol !== 'file:' && !isNativeApp) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
 }
 

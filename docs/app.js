@@ -43,6 +43,8 @@ function apply() {
   video.style.transform = `scale(${(mirrored ? -1 : 1) * s.zoom}, ${s.zoom})`;
   video.style.filter = `brightness(${s.brightness}%)`;
   $('grid').hidden = !s.grid;
+  // Android app: full brightness makes the ring light actually light your face.
+  setScreenBrightness(s.ring ? 1 : null);
 
   $('lightBtn').setAttribute('aria-pressed', String(s.ring));
   $('flipBtn').setAttribute('aria-pressed', String(!s.mirror));
@@ -168,6 +170,21 @@ async function takePhoto() {
   const d = new Date();
   const pad = (n) => String(n).padStart(2, '0');
   const name = `mirror-${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}.jpg`;
+  // Android app: save the photo to a temp file, then open the share sheet ("Save to Gallery", WhatsApp...).
+  const fs = nativePlugin('Filesystem');
+  const share = nativePlugin('Share');
+  if (fs && share) {
+    try {
+      const data = canvas.toDataURL('image/jpeg', 0.92).split(',')[1];
+      const { uri } = await fs.writeFile({ path: name, data, directory: 'CACHE' });
+      await share.share({ title: 'صورة من المرآة', files: [uri] });
+    } catch (err) {
+      const msg = String((err && err.message) || '');
+      if (!/cancel/i.test(msg)) toast('تعذّر حفظ الصورة');
+    }
+    return;
+  }
+
   const file = new File([blob], name, { type: 'image/jpeg' });
 
   // Phones: share sheet lets you "Save Image" to the gallery. Otherwise download.

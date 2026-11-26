@@ -1,5 +1,5 @@
 // Offline cache for the mirror web app. Bump VERSION when files change.
-const VERSION = 'mirror-v1';
+const VERSION = 'mirror-v2';
 const ASSETS = [
   './',
   './index.html',

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">المرآة</string>
+    <string name="title_activity_main">المرآة</string>
+    <string name="package_name">io.github.essamkhalifa0284.mirror</string>
+    <string name="custom_url_scheme">io.github.essamkhalifa0284.mirror</string>
+</resources>

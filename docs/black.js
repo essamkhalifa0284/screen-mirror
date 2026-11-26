@@ -20,6 +20,8 @@ function apply() {
   hole.hidden = !s.frame;
   document.documentElement.style.setProperty('--frame', s.width);
   document.documentElement.style.setProperty('--frame-color', warmColor(s.warmth, s.intensity));
+  // Android app: bright frame lights your face; without it, the dimmest screen reflects best.
+  setScreenBrightness(s.frame ? 1 : 0.01);
   $('frameToggle').checked = s.frame;
   $('width').value = s.width;
   $('widthOut').textContent = s.width;
@@ -49,6 +51,8 @@ document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT' && e.target.type === 'range') return;
   if (e.code === 'KeyL') set({ frame: !settings.frame });
 });
+
+if (isNativeApp) $('dimNote').textContent = 'التطبيق بيظبط إضاءة الشاشة لوحده: أعلى إضاءة مع الإطار، وأقلها من غيره.';
 
 apply();
 keepAwake();
