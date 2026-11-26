@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'">
+  <title>مرآة بدون كاميرا</title>
+  <link rel="stylesheet" href="black.css">
+</head>
+<body>
+  <!-- Lit frame around a black centre: lights your face while the centre stays black to reflect. -->
+  <div id="hole" hidden></div>
+
+  <div id="hint" class="hint" hidden>
+    <h1>مرآة بدون كاميرا</h1>
+    <p>وسط الشاشة أسود علشان يعكس صورتك، والإطار المضيء بينوّر وشّك.</p>
+    <ul>
+      <li><kbd>L</kbd> تشغيل / إيقاف الإطار المضيء</li>
+      <li><kbd>↑</kbd> <kbd>↓</kbd> عرض الإطار &nbsp;·&nbsp; <kbd>←</kbd> <kbd>→</kbd> لونه (بارد / دافئ) &nbsp;·&nbsp; <kbd>+</kbd> <kbd>-</kbd> قوته</li>
+      <li><kbd>مسافة</kbd> أو نقرة: إطفاء الشاشة تماماً (أقوى انعكاس، بدون إضاءة)</li>
+      <li id="dimLine"><kbd>D</kbd> تقليل / رجوع إضاءة الشاشة</li>
+      <li><kbd>Esc</kbd> خروج</li>
+    </ul>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="black.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>مرآة بدون كاميرا</title>
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="المرآة">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Black centre reflects you like a switched-off screen; the lit frame lights your face. -->
+  <main id="stage" class="stage show-ui">
+    <div id="hole"></div>
+
+    <p id="hint" class="hint">الشاشة السودا بتعكس صورتك زي الموبايل وهو مقفول.<br>اضغط على الشاشة لإظهار أو إخفاء الأدوات.</p>
+
+    <header class="topbar chrome">
+      <a class="btn pill" href="./" title="المرآة بالكاميرا">
+        <svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        بالكاميرا
+      </a>
+      <div class="group">
+        <button class="btn round" id="fullBtn" title="ملء الشاشة" hidden>
+          <svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section id="sheet" class="sheet bottom chrome" aria-label="إعدادات الإطار">
+      <label class="field-row">
+        <span>الإطار المضيء</span>
+        <input type="checkbox" class="switch" id="frameToggle">
+      </label>
+      <label class="field">
+        <span>عرض الإطار <output id="widthOut"></output></span>
+        <input type="range" id="width" min="2" max="25" step="1">
+      </label>
+      <label class="field">
+        <span>لون الإطار <small>بارد ← دافئ</small></span>
+        <input type="range" id="warmth" class="warmth" min="0" max="100" step="1">
+      </label>
+      <label class="field">
+        <span>قوة الإضاءة <output id="intensityOut"></output></span>
+        <input type="range" id="intensity" min="20" max="100" step="5">
+      </label>
+      <p class="note">لأوضح انعكاس: خلّي النور على وشّك والمكان وراك أضلم. لو قفلت الإطار، قلّل إضاءة الموبايل من الإعدادات السريعة.</p>
+    </section>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="black.js"></script>
+</body>
+</html>

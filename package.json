@@ -1,0 +1,49 @@
+{
+  "name": "screen-mirror",
+  "version": "1.0.0",
+  "description": "مرآة على الشاشة باستخدام كاميرا الكمبيوتر أو بدونها",
+  "author": "Mirror",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis --x64",
+    "postinstall": "node node_modules/electron/install.js"
+  },
+  "devDependencies": {
+    "electron": "^45.5.0",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.local.screenmirror",
+    "productName": "المرآة",
+    "executableName": "Mirror",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "index.html",
+      "styles.css",
+      "black.html",
+      "black.css",
+      "black.js"
+    ],
+    "win": {
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "المرآة",
+      "artifactName": "Mirror-Setup-${version}.exe",
+      "include": "build/installer.nsh"
+    }
+  }
+}

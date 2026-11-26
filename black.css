@@ -1,0 +1,72 @@
+:root {
+  --frame: 8;               /* frame width in vmin */
+  --frame-color: #fff1dc;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  cursor: none;
+  user-select: none;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+/* Black rounded "mirror" in the middle; its huge spread shadow paints the lit frame around it. */
+#hole {
+  position: fixed;
+  inset: calc(var(--frame) * 1vmin);
+  border-radius: 28px;
+  background: #000;
+  box-shadow: 0 0 0 200vmax var(--frame-color);
+  transition: inset 0.15s ease, box-shadow 0.15s ease;
+}
+#hole[hidden] { display: none; }
+
+/* Kept very dim so it barely affects the reflection, then fades out completely. */
+.hint {
+  position: fixed;
+  bottom: calc(var(--frame) * 1vmin + 30px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, calc(100% - 60px));
+  color: #5a5a5a;
+  font-size: 15px;
+  line-height: 1.9;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+body.no-frame .hint { bottom: 40px; }
+.hint.show { opacity: 1; }
+.hint h1 { margin: 0 0 6px; font-size: 18px; font-weight: 600; color: #6a6a6a; }
+.hint p { margin: 0 0 8px; }
+.hint ul { margin: 0; padding: 0; list-style: none; }
+
+kbd {
+  display: inline-block;
+  padding: 0 6px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 13px;
+  direction: ltr;
+}
+
+.toast {
+  position: fixed;
+  top: calc(var(--frame) * 1vmin + 24px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border: 1px solid #2a2a2a;
+  border-radius: 999px;
+  color: #777;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+body.no-frame .toast { top: 30px; }
+.toast.show { opacity: 1; }
